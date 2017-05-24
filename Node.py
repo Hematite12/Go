@@ -5,6 +5,8 @@ class Node:
         self.x = x
         self.y = y
         self.piece = None
+        
+        self.searched = False
     
     def showEllipse(self, xPos, yPos):
         ellipse(xPos + CELLDIM // 2, yPos + CELLDIM // 2, CELLDIM-1, CELLDIM-1)
@@ -12,13 +14,19 @@ class Node:
     def isEmpty(self):
         return self.piece == None
     
+    def isBlack(self):
+        return self.piece == "b"
+    
+    def isWhite(self):
+        return self.piece == "w"
+    
     def setBlack(self):
         self.piece = "b"
     
     def setWhite(self):
         self.piece = "w"
     
-    def setNone(self):
+    def setEmpty(self):
         self.piece = None
     
     def getPos(self):
