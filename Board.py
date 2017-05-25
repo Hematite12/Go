@@ -7,6 +7,8 @@ class Board:
     def __init__(self):
         self.playing = "b"
         self.matrix = [[Node(x, y) for x in range(SIZE)] for y in range(SIZE)]
+        
+        self.koNode = None
     
     def changePlayer(self):
         if self.playing == "b":
@@ -24,7 +26,7 @@ class Board:
         for x in range(SIZE):
             for y in range(SIZE):
                 self.matrix[y][x].show()
-    
+        
     def inPosBounds(self, x, y):
         return x>MARGIN and x<XMAX and y>MARGIN and y<YMAX
     
@@ -107,10 +109,10 @@ class Board:
                     node.setBlack()
                 elif self.playing == "w":
                     node.setWhite()
+                self.checkCaptures(xNode, yNode)
                 if self.zeroLiberties(xNode, yNode, self.getOtherPlayer()):
                     node.setEmpty()
                 else:
-                    self.checkCaptures(xNode, yNode)
                     self.changePlayer()
     
     

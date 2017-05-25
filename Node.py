@@ -7,9 +7,11 @@ class Node:
         self.piece = None
         
         self.searched = False
+        
+        self.ko = False
     
-    def showEllipse(self, xPos, yPos):
-        ellipse(xPos + CELLDIM // 2, yPos + CELLDIM // 2, CELLDIM-1, CELLDIM-1)
+    def showEllipse(self, xPos, yPos, sc=1):
+        ellipse(xPos + CELLDIM // 2, yPos + CELLDIM // 2, (CELLDIM-1)*sc, (CELLDIM-1)*sc)
     
     def isEmpty(self):
         return self.piece == None
@@ -38,7 +40,9 @@ class Node:
         xPos, yPos = self.getPos()
         rect(xPos, yPos, CELLDIM, CELLDIM)
         stroke(0)
-        if self.piece == "b":
+        if self.ko:
+            self.showKo()
+        elif self.piece == "b":
             fill(*BLACKCOLOR)
             self.showEllipse(xPos, yPos)
         elif self.piece == "w":
@@ -69,6 +73,11 @@ class Node:
             xPos, yPos = self.getPos()
             self.showEllipse(xPos, yPos)
     
+    def showKo(self):
+        # if self.isEmpty():
+        fill(0)
+        xPos, yPos = self.getPos()
+        self.showEllipse(xPos, yPos, .2)
     
     
     
