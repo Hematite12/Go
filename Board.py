@@ -14,6 +14,12 @@ class Board:
         else:
             self.playing = "b"
     
+    def getOtherPlayer(self):
+        if self.playing == "b":
+            return "w"
+        else:
+            return "b"
+    
     def show(self):
         for x in range(SIZE):
             for y in range(SIZE):
@@ -101,11 +107,11 @@ class Board:
                     node.setBlack()
                 elif self.playing == "w":
                     node.setWhite()
-                #if self.zeroLiberties(xNode, yNode, self.playing):
-                #    node.setEmpty()
-                #else:
-                self.checkCaptures(xNode, yNode)
-                self.changePlayer()
+                if self.zeroLiberties(xNode, yNode, self.getOtherPlayer()):
+                    node.setEmpty()
+                else:
+                    self.checkCaptures(xNode, yNode)
+                    self.changePlayer()
     
     
     
